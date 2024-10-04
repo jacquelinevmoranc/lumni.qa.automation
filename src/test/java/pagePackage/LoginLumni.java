@@ -7,9 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 import basePage.Base;
 
 public class LoginLumni extends Base {
+	static WebDriverWait driverWait;
 
 	// Constructor
 	public LoginLumni(WebDriver driver) {
@@ -49,8 +51,8 @@ public class LoginLumni extends Base {
 
 		if (isDisplayed(loginTitle)) {
 			type("jacquelinevmc23+0804codeable@gmail.com", email);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"radio-group-loginType-id-1\"]")));
+			WebDriverWait ewait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			ewait.until(ExpectedConditions.elementToBeClickable(enterPasswordButton));
 			click(enterPasswordButton);
 			click(nextButton);
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

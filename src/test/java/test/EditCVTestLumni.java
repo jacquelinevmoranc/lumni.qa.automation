@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -55,7 +56,11 @@ class EditCVTestLumni {
 		
 		// Método que valida que todos los elementos estén visibles
 		editCVLumni.displayedElementsEditCV();
-
+		
+		// Método para subir archivo
+		editCVLumni.uploadCV();
+		
+		
 	}
 
 

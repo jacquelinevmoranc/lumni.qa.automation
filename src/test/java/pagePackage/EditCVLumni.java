@@ -1,5 +1,6 @@
 package pagePackage;
 
+import java.io.File;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -20,7 +21,8 @@ public class EditCVLumni extends Base {
 	By optionEditCV = By.xpath("//a[text()='Editar hoja de vida']");
 	By textWelcome = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[1]");
 	By textAttachedCV = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[2]/p");
-	By buttonAttachedFile = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[3]/div/button");
+	By buttonAttachedFile = By.xpath("//button[text()='Subir archivo']");
+	By buttonChangeFile = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[3]/div/button");
 	By textDragHere = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[3]/div/p[1]");
 	By textAllowPDForWORD = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[3]/div/p[2]");
 	By textFileAttached = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[4]/p[1]");
@@ -38,13 +40,13 @@ public class EditCVLumni extends Base {
 	public void sectionEditCV() {
 		if (isDisplayed(arrowDropdown)) {
 			click(arrowDropdown);
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='Editar hoja de vida']")));
+			WebDriverWait await = new WebDriverWait(driver, Duration.ofSeconds(10));
+			await.until(ExpectedConditions.elementToBeClickable(optionEditCV));
 			click(optionEditCV);
-			
+
 		}
 	}
-	
+
 	// Validar ingreso a sección "Editar hoja de vida"
 	public boolean sectionEditHVSuccess() {
 		return isDisplayed(textWelcome);
@@ -60,5 +62,22 @@ public class EditCVLumni extends Base {
 		isDisplayed(textReplaceFile);
 		isDisplayed(buttonSave);
 
+	}
+
+	// Subir archivo en "Editar HV"
+	public void uploadCV() {
+		
+		File file = new File("C:\\Users\\jacqu\\Downloads\\platzi_joha.pdf");
+		String path = file.getAbsolutePath();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.findElement(buttonAttachedFile).sendKeys(path);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		if (isDisplayed(buttonChangeFile)) {
+			click(buttonSave);
+			System.out.println("The file was changed");
+		} else {
+			System.out.println("The button 'Cambiar archivo' is not displayed");
+		}
+			
 	}
 }
