@@ -1,3 +1,9 @@
+/* Actualmente no se puede interactuar con este módulo
+500 Internal Server Error
+If you are the administrator of this website, then please read this web 
+application's log file and/or the web server's log file to find out what went wrong.
+ */
+
 package pagePackage;
 
 import org.openqa.selenium.By;

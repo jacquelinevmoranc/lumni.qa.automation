@@ -10,8 +10,6 @@
     <artifactId>selenium-java</artifactId>
     <version>4.25.0</version>
 </dependency>
-
-
 	<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
 	<dependency>
 	    <groupId>org.junit.jupiter</groupId>

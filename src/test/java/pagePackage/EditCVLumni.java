@@ -1,6 +1,7 @@
 package pagePackage;
 
-import java.io.File;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -21,13 +22,14 @@ public class EditCVLumni extends Base {
 	By optionEditCV = By.xpath("//a[text()='Editar hoja de vida']");
 	By textWelcome = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[1]");
 	By textAttachedCV = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[2]/p");
-	By buttonAttachedFile = By.xpath("//button[text()='Subir archivo']");
+	By buttonAttachedFile = By.xpath("//input[@type='file']");
 	By buttonChangeFile = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[3]/div/button");
 	By textDragHere = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[3]/div/p[1]");
 	By textAllowPDForWORD = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[3]/div/p[2]");
 	By textFileAttached = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[4]/p[1]");
 	By textReplaceFile = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/p");
 	By buttonSave = By.xpath("//*[@id=\"__next\"]/div/div/div/div/main/div/div/section/div/div[5]/button");
+	By nameFileAttached = By.xpath("//p[text()='platzi_joha.pdf']");
 
 	// Estos son los Métodos:
 
@@ -54,30 +56,62 @@ public class EditCVLumni extends Base {
 
 	// Validar elementos visibles en sección "Editar HV"
 	public void displayedElementsEditCV() {
-		isDisplayed(textAttachedCV);
-		isDisplayed(buttonAttachedFile);
-		isDisplayed(textDragHere);
-		isDisplayed(textAllowPDForWORD);
-		isDisplayed(textFileAttached);
-		isDisplayed(textReplaceFile);
-		isDisplayed(buttonSave);
+		if (driver.findElement(textAttachedCV).isDisplayed()) {
+			System.out.println("The principal message is displayed");
+		} else {
+			System.out.println("The principal message is not displayed");
+		}
+		
+		if (driver.findElement(buttonAttachedFile).isDisplayed()) {
+			System.out.println("The button 'Subir archivo' is displayed");
+		} else {
+			System.out.println("The button 'Subir archivo' is not displayed");
+		}
+		
+		if (driver.findElement(textDragHere).isDisplayed()) {
+			System.out.println("The message 'Arrástralo' is displayed");
+		} else {
+			System.out.println("The message 'Arrástralo' is not displayed");
+		}
+		
+		if (driver.findElement(textAllowPDForWORD).isDisplayed()) {
+			System.out.println("The message 'PDF o Word' is displayed");
+		} else {
+			System.out.println("The message 'PDF o Word' is not displayed");
+		}
+		
+		if (driver.findElement(textFileAttached).isDisplayed()) {
+			System.out.println("The message 'Archivo adjunto' is displayed");
+		} else {
+			System.out.println("The message 'Archivo adjunto' is not displayed");
+		}
+		
+		if (driver.findElement(textReplaceFile).isDisplayed()) {
+			System.out.println("The message 'Para cambiar este archivo' is displayed");
+		} else {
+			System.out.println("The message 'Para cambiar este archivo' is not displayed");
+		}
+		
+		if (driver.findElement(buttonSave).isDisplayed()) {
+			System.out.println("The button 'Guardar' is displayed");
+		} else {
+			System.out.println("The button 'Guardar' is not displayed");
+		}
 
 	}
 
 	// Subir archivo en "Editar HV"
 	public void uploadCV() {
 		
-		File file = new File("C:\\Users\\jacqu\\Downloads\\platzi_joha.pdf");
-		String path = file.getAbsolutePath();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.findElement(buttonAttachedFile).sendKeys(path);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		String file = "C:\\Users\\jacqu\\Downloads\\platzi_joha.pdf";
+		driver.findElement(buttonAttachedFile).sendKeys(file);
 		if (isDisplayed(buttonChangeFile)) {
 			click(buttonSave);
 			System.out.println("The file was changed");
 		} else {
-			System.out.println("The button 'Cambiar archivo' is not displayed");
+			System.out.println("The file is not allowed");
 		}
-			
+		String text = driver.findElement(nameFileAttached).getText();
+		assertEquals("platzi_joha.pdf", text);
 	}
 }

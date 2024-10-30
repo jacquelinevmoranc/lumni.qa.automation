@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -51,11 +52,11 @@ class LoginTestLumni {
 	void loginWithoutEmail() {
 		// Método que valida que los elementos existan
 		loginLumni.Login();
-		//Método para validar que no se ingresó email y no se puede continuar
+		// Método para validar que no se ingresó email y no se puede continuar
 		loginLumni.loginWithoutEmail();
 
 	}
-	
+
 	@Test
 	void loginWithoutPassword() {
 		// Método que valida que los elementos existan
@@ -63,10 +64,19 @@ class LoginTestLumni {
 		// Método para validar que se ingresó email, pero no contraseña.
 		loginLumni.loginWithoutPassword();
 	}
-	
+
 	@Test
 	void messageLoginWithPassword() {
+		// Método que valida el mensaje luego de haber ingresado el email.
 		loginLumni.messageLoginWithPassword();
+	}
+
+	@Test
+	//@RepeatedTest(5)
+	void sendCode() {
+
+		// Método que valida el ingreso por código
+		loginLumni.sendCode();
 	}
 
 }
